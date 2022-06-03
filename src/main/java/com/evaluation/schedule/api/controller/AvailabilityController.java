@@ -27,7 +27,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/availability")
-@Path("/availability")
 public class AvailabilityController {
 	
 	@Autowired
@@ -36,16 +35,16 @@ public class AvailabilityController {
 	private AvailabilityService availabilityService;
 		
 	@GetMapping
-	public List<Availability> listar() {
+	public List<Availability> find() {
 		return availabilityRepository.findAll();
 	}
 	
-	@GetMapping("/listar2")
-	public String listar2() {
+	@GetMapping("/findOk")
+	public String findOK() {
 		return "Ok";
 	}
 	
-	@GetMapping("/{clienteId}")
+	@GetMapping("/{clientId}")
 	public ResponseEntity<Availability> find(@PathVariable Long availabilityId) {
 		return availabilityRepository.findById(availabilityId)
 				.map(ResponseEntity::ok)

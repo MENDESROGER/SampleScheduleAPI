@@ -33,6 +33,9 @@ public class Availability {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@ManyToOne
+	private Room room;
+		
 	@Column
 	private String observation;
 		
@@ -44,8 +47,6 @@ public class Availability {
 	
 	@Column(name="availabletimeend")
 	private OffsetDateTime availableTimeEnd;
-				
-	@ManyToOne
-	private Room room;
-
+		
+					
 }

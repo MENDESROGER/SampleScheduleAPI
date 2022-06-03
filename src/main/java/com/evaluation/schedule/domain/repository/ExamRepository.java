@@ -13,7 +13,7 @@ import com.evaluation.schedule.domain.model.Exam;
 @Repository
 public interface ExamRepository extends JpaRepository<Exam,Long>  {
 	
-	@Query("SELECT e FROM Exam e WHERE e.candidate.id = ?1 and e.availability.id > ?2")
-	Optional<Exam> findByExam(Long candidateId, Long availabilityId);
+	@Query("SELECT e FROM Exam e WHERE e.candidate.id = ?1 and e.availability.id = ?2")
+	Optional<Exam> findByExamRealized(Long candidateId, Long availabilityId);
 
 }

@@ -20,8 +20,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.evaluation.schedule.api.exception.ResourceNotFoundException;
+import com.evaluation.schedule.api.model.ExamImput;
 import com.evaluation.schedule.domain.model.Exam;
 import com.evaluation.schedule.domain.repository.ExamRepository;
+import com.evaluation.schedule.domain.service.AvailabilityService;
+import com.evaluation.schedule.domain.service.ExamService;
 
 import lombok.AllArgsConstructor;
 
@@ -34,6 +37,9 @@ public class ExamResource {
 	@Autowired
 	private ExamRepository examRepository;
 	
+	@Autowired
+	private ExamService examService;
+	
 	@GET
 	@Produces("application/json")	
 	@Path("/find")	
@@ -45,8 +51,8 @@ public class ExamResource {
 	@Consumes("application/json")	
 	@Produces("application/json")
 	@Path("/create")
-	public Exam create(Exam exam) {
-		return examRepository.save(exam);			
+	public Exam create(ExamImput examImput) {
+		return examService.save(examImput);			
 	}
 	
 	/* @PUT

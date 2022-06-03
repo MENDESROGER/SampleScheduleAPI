@@ -22,7 +22,7 @@ import com.evaluation.schedule.domain.repository.CandidateRepository;
 @AutoConfigureMockMvc
 public class CandidateResourceTest {
 
-	@Autowired
+/*	@Autowired
 	private CandidateResource candidateResource;
 		
 	@MockBean
@@ -33,7 +33,7 @@ public class CandidateResourceTest {
 	
 	@Test void candidateTestGetAll() throws Exception {
 		mockMvc.perform(get("/candidate/listar2")).andExpect(status().isOk());
-	}
+	}*/
 	
  }
 

@@ -1,9 +1,9 @@
 CREATE TABLE `exam` (
-  `candidate_id` bigint(20) NOT NULL,
-  `availability_id` bigint(20) NOT NULL,
-  `datescheduling` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON
-  UPDATE
-    CURRENT_TIMESTAMP,
-    `typecertification` varchar(20) NOT NULL,
-    PRIMARY KEY (`candidate_id`, `availability_id`)
+  `id` bigint(20) NOT NULL auto_increment,
+  `candidate_id` bigint(20) DEFAULT NULL,
+  `availability_id` bigint(20) DEFAULT NULL,
+  `datescheduling` timestamp NOT NULL,
+  `typecertification` varchar(20) NOT NULL,
+   `codesubscription` int NOT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = latin1

@@ -1,5 +1,7 @@
 package com.evaluation.schedule.domain.service;
 
+import java.time.LocalDate;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,12 +17,13 @@ import com.evaluation.schedule.domain.model.Room;
 import com.evaluation.schedule.domain.repository.AvailabilityRepository;
 import com.evaluation.schedule.domain.repository.CandidateRepository;
 import com.evaluation.schedule.domain.repository.ExamRepository;
+import com.evaluation.schedule.domain.utility.OperationDate;
 
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service
-public class ExameService {
+public class ExamService {
 	
 	private ExamRepository examRepository;
 	
@@ -34,35 +37,51 @@ public class ExameService {
 
 	private ExamAssember examAssember;
 	
+	private OperationDate operationDate;
+		
+	
 	@Transactional
 	public Exam save(ExamImput examImput) {
 		Exam exam = examAssember.toEntity(examImput);
 		
-		boolean candidateFound = candidateRepository.findById(examImput.getCandidate().getId())
-				.stream()
-				.anyMatch(candidateExist -> !candidateExist.equals(exam.getCandidate()));
 		
-		if (candidateFound) {
-			throw new ServiceException("Candidato is not found");
-		}else {		
-			Candidate candidate = candidateService.findCandidate(examImput.getCandidate().getId());				
-			exam.setCandidate(candidate);					
-		}
+		boolean examRealized = examRepository
+				.findByExamRealized(examImput.getCandidate().getId(), examImput.getAvailability().getId()).isEmpty();
+
+		if (!examRealized) {
+			throw new ServiceException("Candidate cannot be scheduled for same availability");
+		} 
 		
 		
-		boolean availabilityFound = availabilityRepository.findById(examImput.getAvailability().getId())
-				.stream()
-				.anyMatch(availabilityExist -> !availabilityExist.equals(exam.getCandidate()));
+		Candidate candidate = candidateService.findCandidate(examImput.getCandidate().getId());
 		
-		if (availabilityFound) {
+									
+		if (candidate==null) {
+			throw new ServiceException("Candidate is not found");
+		}							
+		
+		exam.setCandidate(candidate);					
+		
+				
+		Availability availability = availabilityService.findAvailability(examImput.getAvailability().getId());
+		
+		if (availability==null) {
 			throw new ServiceException("Availability is not found");
-		}else {		
-			Availability availability = availabilityService.findAvailability(examImput.getAvailability().getId());				
-			exam.setAvailability(availability);				
 		}
-					
+		
+		exam.setAvailability(availability);
+		
+		exam=examRepository.save(exam);
+			
+		exam.setCodesubscription(generateRegistrationCode(exam.getId()));
+						
 		return examRepository.save(exam);
 		
 	}
-
+	
+	private Integer generateRegistrationCode(Long idExam) {	
+				
+		return Integer.parseInt(""+operationDate.DateGetYear()+""+idExam);				
+	}
+		
 }

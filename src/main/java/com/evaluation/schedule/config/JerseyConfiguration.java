@@ -11,7 +11,6 @@ import com.evaluation.schedule.api.controller.CandidateResource;
 @ApplicationPath("JAX-RS")
 public class JerseyConfiguration extends ResourceConfig {
  public JerseyConfiguration(Class<?> ... classes) {
-  //register(CandidateResource.class);
 	packages("com.evaluation.schedule.api.controller");
  }
 }

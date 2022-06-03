@@ -39,15 +39,15 @@ public class CandidateResource {
 	
 	@GET
 	@Produces("application/json")	
-	@Path("/listar")	
+	@Path("/find")	
 	public List<Candidate> getAll(){
 		return candidateRepository.findAll();
 	}
 	
 	
 	@GET	
-	@Path("/listar2")	
-	public String getAll2(){
+	@Path("/findOk")	
+	public String findOk(){
 		return "Ok";
 	}
 	
