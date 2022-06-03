@@ -110,7 +110,11 @@
 			<artifactId>java-jwt</artifactId>
 			<version>3.16.0</version>
 		</dependency>
-
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
 
 	</dependencies>
 
@@ -129,21 +133,12 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<!--start with basic information to get Liquibase plugin: include <groupId>, 
-					<artifactID>, and <version> elements -->
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-maven-plugin</artifactId>
 				<configuration>
-					<!--set values for Liquibase properties and settings for example, the 
-						location of a properties file to use -->
 					<propertyFile>src/main/resources/db/changelog/liquibase.properties</propertyFile>
 					<PropertyFileWillOverrride>true</PropertyFileWillOverrride>
 				</configuration>
-				<dependencies>
-					<!--set up any dependencies for Liquibase to function in your environment 
-						for example, a database-specific plugin <dependency> <groupId>com.h2database</groupId> 
-						<artifactId>h2</artifactId> <version>1.4.199</version> </dependency> -->
-				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
