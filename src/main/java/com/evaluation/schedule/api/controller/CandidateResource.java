@@ -14,6 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,9 @@ import com.evaluation.schedule.api.exception.ResourceNotFoundException;
 import com.evaluation.schedule.domain.model.Candidate;
 import com.evaluation.schedule.domain.repository.CandidateRepository;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
@@ -32,6 +36,9 @@ import org.springframework.http.ResponseEntity;
 @AllArgsConstructor
 @Component
 @Path("/candidate")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
+@Api(value = "Hello API - say hello to the world", produces = "application/json")
 public class CandidateResource {
 	
 	@Autowired
@@ -40,6 +47,12 @@ public class CandidateResource {
 	@GET
 	@Produces("application/json")	
 	@Path("/find")	
+	@ApiOperation(            //Swagger Annotation
+            value = "Say hello by entering your name",
+            response = Candidate.class)
+    @ApiResponses(value = {       //Swagger Annotation
+            
+    })
 	public List<Candidate> getAll(){
 		return candidateRepository.findAll();
 	}

@@ -21,22 +21,17 @@ public class AvailabilityRepositoryExtendsInMemory extends AvailabilityRepositor
 	
 	@Override
 	public <S extends Availability> S save(S entity) {
-		System.out.print("antes");
-		
-		
+					
 		//Availability availability = availabilityAssember.toEntity(availabilityImput);
 
 		boolean availabilityFound = findByAvailabilityRoom(entity.getRoom().getId(), entity.getAvailableTimeStart())
 				.stream().anyMatch(availabilityExist -> !availabilityExist.getRoom().equals(entity.getRoom().getId()));
 
-		if (availabilityFound) {
-			System.out.println("erro");
+		if (availabilityFound) {		
 			throw new ServiceException("There is an appointment for this room at the same time");
 		}
-				
-		System.out.println("sala:"+entity.getRoom().getId());
-		allAvailability = Optional.of(entity);				
-		System.out.println("persiste"+entity.getId());
+						
+		allAvailability = Optional.of(entity);						
 		return entity;
 	}
 	

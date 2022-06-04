@@ -32,7 +32,7 @@ public class SpringFoxConfig {
 		
 			
 	    return new ApiInfoBuilder()
-	            .title("Simple Spring Boot API REST SampleScheduleAPI")
+	            .title("Simple Spring Boot API REST e REST WS SampleScheduleAPI")
 	            .description("Agendamento de Exames de Certificação")
 	            .description("Avaliação Técnica em Proceso Seletivo")
 	            .version("1.0.0")

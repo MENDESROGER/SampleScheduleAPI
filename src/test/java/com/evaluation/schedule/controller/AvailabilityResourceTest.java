@@ -56,7 +56,7 @@ public class AvailabilityResourceTest {
      }
 	
 	@Test void candidateTestGetAll() throws Exception {
-		mockMvc.perform(get("/availability/findOK")).andExpect(status().isOk());
+		mockMvc.perform(get("/availability/findOk")).andExpect(status().isOk());
 	}
 	
 			
