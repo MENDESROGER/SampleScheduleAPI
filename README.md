@@ -6,6 +6,7 @@ CRUD (Create,  Read, Update, Delete) de Agendamento de Exames de Certificação
 # Documentação Swagger
 Url: http://localhost:8080/swagger-ui.html
 API REST - Spring
+
 API REST - JAX-RS não implementada
 
 # Autenticação com spring security e JWT
